@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Play Wordle</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+	<div id="header">Wordle</div>
+	<div id="scoreView" hidden>
+		<h2 id="scoreViewHeader">greeting</h2>
+		<h3 id="scoreViewScore">score</h3>
+		<p id="scoreViewSummary">summary</p>
+		<button id="newGameButton" onclick="send('Enter',true)">New Game (CTRL + Enter)</button>
+		<button id="viewWordle"
+			onclick="document.getElementById('mainView').hidden = !document.getElementById('mainView').hidden;">View
+			Wordle </button>
+	</div>
+	<div id="mainView">
+		<div id="gameboard">
+			<p>
+				<span class="charBox" id="charBox11">?</span>
+				<span class="charBox" id="charBox12">?</span>
+				<span class="charBox" id="charBox13">?</span>
+				<span class="charBox" id="charBox14">?</span>
+				<span class="charBox" id="charBox15">?</span>
+			</p>
+			<p>
+				<span class="charBox" id="charBox21">?</span>
+				<span class="charBox" id="charBox22">?</span>
+				<span class="charBox" id="charBox23">?</span>
+				<span class="charBox" id="charBox24">?</span>
+				<span class="charBox" id="charBox25">?</span>
+			</p>
+			<p>
+				<span class="charBox" id="charBox31">?</span>
+				<span class="charBox" id="charBox32">?</span>
+				<span class="charBox" id="charBox33">?</span>
+				<span class="charBox" id="charBox34">?</span>
+				<span class="charBox" id="charBox35">?</span>
+			</p>
+			<p>
+				<span class="charBox" id="charBox41">?</span>
+				<span class="charBox" id="charBox42">?</span>
+				<span class="charBox" id="charBox43">?</span>
+				<span class="charBox" id="charBox44">?</span>
+				<span class="charBox" id="charBox45">?</span>
+			</p>
+			<p>
+				<span class="charBox" id="charBox51">?</span>
+				<span class="charBox" id="charBox52">?</span>
+				<span class="charBox" id="charBox53">?</span>
+				<span class="charBox" id="charBox54">?</span>
+				<span class="charBox" id="charBox55">?</span>
+			</p>
+			<p>
+				<span class="charBox" id="charBox61">?</span>
+				<span class="charBox" id="charBox62">?</span>
+				<span class="charBox" id="charBox63">?</span>
+				<span class="charBox" id="charBox64">?</span>
+				<span class="charBox" id="charBox65">?</span>
+			</p>
+		</div>
+		<div id="keyboard">
+			<div id="row1">
+				<button id="qButton" class="keyboard" onclick="send('q',false)">q</button>
+				<button id="wButton" class="keyboard" onclick="send('w',false)">w</button>
+				<button id="eButton" class="keyboard" onclick="send('e',false)">e</button>
+				<button id="rButton" class="keyboard" onclick="send('r',false)">r</button>
+				<button id="tButton" class="keyboard" onclick="send('t',false)">t</button>
+				<button id="yButton" class="keyboard" onclick="send('y',false)">y</button>
+				<button id="uButton" class="keyboard" onclick="send('u',false)">u</button>
+				<button id="iButton" class="keyboard" onclick="send('i',false)">i</button>
+				<button id="oButton" class="keyboard" onclick="send('o',false)">o</button>
+				<button id="pButton" class="keyboard" onclick="send('p',false)">p</button>
+			</div>
+			<div id="row2">
+				<button id="aButton" class="keyboard" onclick="send('a',false)">a</button>
+				<button id="sButton" class="keyboard" onclick="send('s',false)">s</button>
+				<button id="dButton" class="keyboard" onclick="send('d',false)">d</button>
+				<button id="fButton" class="keyboard" onclick="send('f',false)">f</button>
+				<button id="gButton" class="keyboard" onclick="send('g',false)">g</button>
+				<button id="hButton" class="keyboard" onclick="send('h',false)">h</button>
+				<button id="jButton" class="keyboard" onclick="send('j',false)">j</button>
+				<button id="kButton" class="keyboard" onclick="send('k',false)">k</button>
+				<button id="lButton" class="keyboard" onclick="send('l',false)">l</button>
+			</div>
+			<div id="row3">
+				<button id="zButton" class="keyboard" onclick="send('z',false)">z</button>
+				<button id="xButton" class="keyboard" onclick="send('x',false)">x</button>
+				<button id="cButton" class="keyboard" onclick="send('c',false)">c</button>
+				<button id="vButton" class="keyboard" onclick="send('v',false)">v</button>
+				<button id="bButton" class="keyboard" onclick="send('b',false)">b</button>
+				<button id="nButton" class="keyboard" onclick="send('n',false)">n</button>
+				<button id="mButton" class="keyboard" onclick="send('m',false)">m</button>
+			</div>
+			<div class="row4">
+				<button onclick="send('Enter',false)">Submit</button>
+				<button onclick="send('Backspace',false)">Delete</button>
+				<button onclick="send('Backspace',true)">Clear</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="script.js"></script>
+
+</html>
