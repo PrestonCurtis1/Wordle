@@ -44,3 +44,5 @@ if the word is incorrect and there not on there 6th trie increment **currentRow*
 - unhide **scoreView**
 - Tell the user whether they won or lost
 - show them their **score**
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfYcE6lkHFAm6eyPcMayc6V49NjjVjgblwVyxvr0A3T5ZQVjQ/viewform?usp=sf_link">Send Feedback</a>
