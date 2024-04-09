@@ -150,17 +150,17 @@ document.addEventListener("DOMContentLoaded", () => {
 		allowInput = false;
 		score = 7 - currentRow;
 		let greetings,greeting,status,summary;
-		if (!(didWin)){
-			greetings = ["Too Bad!","Ah Shucks!"];
-			greeting = greetings[Math.floor(Math.random() * greetings.length)];
-			status = "You Lost";
-			summary  = "You Where unable to guess the word " + randomWord + " and got a score of  " + score;
-		}
-		else if(didWin){
+		if(didWin){
 			greetings = ["Congrats!","Good Job!"];
 			greeting = greetings[Math.floor(Math.random() * greetings.length)];
 			status = "You Won";
 			summary = "You guessed the word " + randomWord + " in " + currentRow + " tries with a score of  " + score;
+		}
+		else if(!(didWin)){
+			greetings = ["Too Bad!","Ah Shucks!"];
+			greeting = greetings[Math.floor(Math.random() * greetings.length)];
+			status = "You Lost";
+			summary  = "You Where unable to guess the word " + randomWord + " and got a score of  " + score;
 		}
 		document.getElementById("mainView").hidden = true;
 		document.getElementById("keyboard").style.display = "none";
