@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 	function submitWord(){
-		typedWord = board[currentRow-1].join("");
-
+		let typedWord = board[currentRow-1].join("");
+		let doneList = []
 		if (!(board[currentRow-1].includes("?"))){
 			if(dictionary.includes(typedWord)){
 			for (let column = 0;column < 5;column++){
@@ -63,6 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				}
 				else if (randomWord.includes(board[currentRow-1][column])){
+					if (doneList.includes(board[currentRow-1][column])){
+						document.getElementById("charBox" + currentRow + "" + (column+1)).style.backgroundColor = "rgb(50,50,50)";
+					if (button.style.backgroundColor != "green" && button.style.backgroundColor != "yellow")button.style.backgroundColor = "gray";
+						continue;
+					}
+					doneList.push(board[currentRow-1][column])
 					document.getElementById("charBox" + currentRow + "" + (column+1)).style.backgroundColor = "yellow";
 					if (button.style.backgroundColor != "green")button.style.backgroundColor = "yellow";
 
