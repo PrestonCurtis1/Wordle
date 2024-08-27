@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
 	function readFile(filePath) {
 		var request = new XMLHttpRequest();
 		request.overrideMimeType("text/plain");
 		request.open('GET', filePath, false);
+
 		request.send();
 		if (request.status === 200) {
 			return request.responseText;
@@ -16,15 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	const dictionary = data.words
 	const solutions = data.solutions
 	var board,currentRow,currentColumn,randomWord,score,didWin,allowInput;
+
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 	//I provide how code works in the pseudo.txt file;
 	function startGame(){
 		allowInput = true;
+
 		currentRow = 1;
 		currentColumn = 1;
 		randomWord = solutions[Math.floor(Math.random() * solutions.length)];
+		//randomWord = "spree";
 		board = [["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"]];
+
 		rightSpotCounter = 0;
 		foundInWordCounter = 0;
 		document.getElementById("keyboard").style.display = "block";
@@ -52,8 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		let typedWord = board[currentRow-1].join("");
 		let doneList = []
 		if (!(board[currentRow-1].includes("?"))){
+
 			if(dictionary.includes(typedWord)){
 			for (let column = 0;column < 5;column++){
+				//Correct spot
 				var button = document.getElementById(board[currentRow-1][column]+"Button");
 				document.getElementById("charBox" + currentRow + "" + (column+1)).style.color = "white";
 				if (board[currentRow-1][column] == randomWord[column]){
@@ -62,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 				}
+				//Wrong spot
 				else if (randomWord.includes(board[currentRow-1][column])){
 					if (doneList.includes(board[currentRow-1][column])){
 						document.getElementById("charBox" + currentRow + "" + (column+1)).style.backgroundColor = "rgb(50,50,50)";
@@ -69,10 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
 						continue;
 					}
 					doneList.push(board[currentRow-1][column])
+					document.getElementById("charBox" + currentRow + "" + (column+1)).innerHTML += "<sup>" + (randomWord.split(board[currentRow-1][column]).length - 1) + "</sup>"
 					document.getElementById("charBox" + currentRow + "" + (column+1)).style.backgroundColor = "yellow";
 					if (button.style.backgroundColor != "green")button.style.backgroundColor = "yellow";
 
 				}
+				//Not in word
 				else{
 					document.getElementById("charBox" + currentRow + "" + (column+1)).style.backgroundColor = "rgb(50,50,50)";
 					if (button.style.backgroundColor != "green" && button.style.backgroundColor != "yellow")button.style.backgroundColor = "gray";
@@ -106,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 		return didWin;
+
 	}
 	function delChar(){
 		if(allowInput){
@@ -150,17 +162,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		allowInput = false;
 		score = 7 - currentRow;
 		let greetings,greeting,status,summary;
-		if(didWin){
-			greetings = ["Congrats!","Good Job!"];
-			greeting = greetings[Math.floor(Math.random() * greetings.length)];
-			status = "You Won";
-			summary = "You guessed the word " + randomWord + " in " + currentRow + " tries with a score of  " + score;
-		}
-		else if(!(didWin)){
+		if (!(didWin)){
 			greetings = ["Too Bad!","Ah Shucks!"];
 			greeting = greetings[Math.floor(Math.random() * greetings.length)];
 			status = "You Lost";
 			summary  = "You Where unable to guess the word " + randomWord + " and got a score of  " + score;
+		}
+		else if(didWin){
+			greetings = ["Congrats!","Good Job!"];
+			greeting = greetings[Math.floor(Math.random() * greetings.length)];
+			status = "You Won";
+			summary = "You guessed the word " + randomWord + " in " + currentRow + " tries with a score of  " + score;
+
 		}
 		document.getElementById("mainView").hidden = true;
 		document.getElementById("keyboard").style.display = "none";

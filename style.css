@@ -76,3 +76,7 @@ div#scoreView {
 div#keyboard div button {
   padding: 3%;
 }
+span.charBox sup{
+  font-size:small;
+  font-weight:1000;
+}
