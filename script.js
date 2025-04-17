@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		currentRow = 1;
 		currentColumn = 1;
-		//randomWord = solutions[Math.floor(Math.random() * solutions.length)];
-		randomWord = "enzym";
+		randomWord = solutions[Math.floor(Math.random() * solutions.length)];
+		//randomWord = "devon";
 		board = [["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"]];
 
 		rightSpotCounter = 0;
