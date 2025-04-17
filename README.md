@@ -1,3 +1,14 @@
+# hint function
+- must be running my <a href="https://github.com/PrestonCurtis1/wordle-answer-finder">Wordle Answer Finder</a> flask app. on localhost:5000
+- can be use if you are stuck.
+- build the data that will be sent to the <a href="https://github.com/PrestonCurtis1/wordle-answer-finder">Wordle Answer Finder</a> API in **sendData**
+# playAI function
+- plays the round as an AI.
+- just uses **hint** 6 times in a row
+# typeWord function
+- can be used to type a whole word rather than using **send** 5 times
+# sendData function
+- makes the request to the <a href="https://github.com/PrestonCurtis1/wordle-answer-finder">Wordle Answer Finder</a> API. and sends back the best most probable word. using the data built by hint() function;
 # startGame function
 - set **currentRow** to 1
 - set **currentColumn** to 1
