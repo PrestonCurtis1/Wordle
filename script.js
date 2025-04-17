@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function playAI(){
 	for (let rounds = 0; rounds < 6;rounds++){
 		setTimeout(function() {
-			typeWord(hint()["Word"])
+			typeWord(hint()["Word"]);
 		}, rounds*5000);
 	}
 }

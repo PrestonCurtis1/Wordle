@@ -80,3 +80,18 @@ span.charBox sup{
   font-size:small;
   font-weight:1000;
 }
+div#header a{
+  color:white;
+}
+p#warning{
+  text-align:center;
+  color:yellow;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+  min-width: 400px;
+
+}
+p#warning a{
+  color: yellow;
+}

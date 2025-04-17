@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<div id="header">Wordle</div>
+	<div id="header"><a href="README.md">Wordle</a></div>
 	<div id="scoreView" hidden>
 		<h2 id="scoreViewHeader">greeting</h2>
 		<h3 id="scoreViewScore">score</h3>
@@ -100,8 +100,11 @@
 				<button onclick="send('Enter',false)">Submit</button>
 				<button onclick="send('Backspace',false)">Delete</button>
 				<button onclick="send('Backspace',true)">Clear</button>
+				<button onclick="playAI()">AI</button>
+				<button onclick="typeWord(hint()['Word'])">Hint</button>
 			</div>
 		</div>
+		<p id="warning">AI requires the <a href="https://github.com/PrestonCurtis1/wordle-answer-finder">Wordle Answer Finder</a> API</p>
 	</div>
 	<a href="https://docs.google.com/forms/d/e/1FAIpQLSfYcE6lkHFAm6eyPcMayc6V49NjjVjgblwVyxvr0A3T5ZQVjQ/viewform?usp=sf_link" target="_blank">
 Submit Feedback
