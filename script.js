@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		return null;
 	}
+	
+	
+	
 	const filePath = "data.json";
 	//const jsonData = readFile(filePath);
 	const jsonData = readFile("data.json");
@@ -27,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		currentRow = 1;
 		currentColumn = 1;
-		randomWord = solutions[Math.floor(Math.random() * solutions.length)];
-		//randomWord = "spree";
+		//randomWord = solutions[Math.floor(Math.random() * solutions.length)];
+		randomWord = "enzym";
 		board = [["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"]];
 
 		rightSpotCounter = 0;
@@ -210,6 +213,69 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	}
 })
+function playAI(){
+	for (let rounds = 0; rounds < 6;rounds++){
+		setTimeout(function() {
+			typeWord(hint()["Word"])
+		}, rounds*2000);
+	}
+}
+function sendData(data) {
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", "http://127.0.0.1:5000/getWord",false); // false = synchronous
+	xhr.setRequestHeader("Content-Type", "application/json");
+  
+	xhr.send(JSON.stringify({ JSONData: data }));
+  
+	if (xhr.status === 200) {
+	  return JSON.parse(xhr.responseText);
+	} else {
+	  console.error("❌ Request failed with status:", xhr.status);
+	  return null;
+	}
+}
+function hint(){
+	var foundList = []
+	var containedList = []
+	var excludedString = ""
+	var amount = [];
+	var nonexcluded = ""
+	for (let row = 1; row < 7; row++){
+		for(let column = 1; column < 6;column++){
+			const box = document.getElementById(`charBox${row}${column}`);
+			const color = box.style.backgroundColor//getComputedStyle(box).backgroundColor;
+			switch(color){
+				case "green":
+					foundList.push({"letter":box.innerText,"spot":column});
+					nonexcluded += box.innerText;
+					break;
+				case "yellow":
+					containedList.push({"letter":box.innerText[0],"location":column});
+					const suptext = document.querySelector(`#charBox${row}${column} sup`).innerText;
+					amount.push({"letter":box.innerText[0],"amount":parseInt(suptext,10)});
+					nonexcluded += box.innerText[0]
+					break;
+				case "rgb(50, 50, 50)":
+					if(nonexcluded.includes(box.innerText)){
+						break;
+					} else{
+						excludedString += box.innerText;
+					}
+					
+			}
+		}
+	}
+	var content = {"contains":containedList,"excludes":excludedString,"found":foundList,"amount":amount};
+	chosenWord = sendData(content);
+	return chosenWord;
+}
+function typeWord(word){
+	for (let letter = 0; letter < 5;letter++){
+		send(word[letter],false);
+	}
+	send("Enter",false);
+}
+
 function send(key, ctrlPressed) {
     var eventOptions = { key: key, ctrlKey: ctrlPressed };
     var event = new KeyboardEvent('keydown', eventOptions);
