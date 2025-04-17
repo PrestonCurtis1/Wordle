@@ -217,7 +217,7 @@ function playAI(){
 	for (let rounds = 0; rounds < 6;rounds++){
 		setTimeout(function() {
 			typeWord(hint()["Word"])
-		}, rounds*2000);
+		}, rounds*5000);
 	}
 }
 function sendData(data) {
@@ -271,9 +271,14 @@ function hint(){
 }
 function typeWord(word){
 	for (let letter = 0; letter < 5;letter++){
-		send(word[letter],false);
+		setTimeout(function() {
+			send(word[letter],false);
+		},letter*100)
 	}
-	send("Enter",false);
+	setTimeout(function() {
+		send("Enter",false);
+	},1000);
+	
 }
 
 function send(key, ctrlPressed) {
