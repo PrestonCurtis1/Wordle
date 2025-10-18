@@ -1,3 +1,4 @@
+var allowInput
 document.addEventListener("DOMContentLoaded", () => {
 
 	function readFile(filePath) {
@@ -20,18 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	const data = JSON.parse(jsonData);
 	const dictionary = data.words
 	const solutions = data.solutions
-	var board,currentRow,currentColumn,randomWord,score,didWin,allowInput;
+	var board,currentRow,currentColumn,randomWord,score;
 
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
 	//I provide how code works in the pseudo.txt file;
 	function startGame(){
 		allowInput = true;
-
 		currentRow = 1;
 		currentColumn = 1;
 		randomWord = solutions[Math.floor(Math.random() * solutions.length)];
-		//randomWord = "devon";
+		//randomWord = "trail";
 		board = [["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"],["?","?","?","?","?"]];
 
 		rightSpotCounter = 0;
@@ -104,22 +104,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 	function checkWin(){
-		typedWord = board[currentRow-1].join("");
-		if (typedWord == randomWord){
-			didWin = true;
-			endGame();
-		}
-		else{
+		var typedWord = board[currentRow-1].join("");
+		if (typedWord === randomWord){
+			console.log(typedWord)
+			endGame(true);
+		}else{
 			if (currentRow == 6){
-				endGame();
-				didWin = false;
-			}
-			else{
+				console.log("Lost on word",typedWord);
+				endGame(false);
+			}else{
 				currentRow++;
 				currentColumn = 1;
 			}
 		}
-		return didWin;
 
 	}
 	function delChar(){
@@ -161,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			currentColumn = 1;
 		}
 	}
-	function endGame(){
+	function endGame(didWin){
 		allowInput = false;
 		score = 7 - currentRow;
 		let greetings,greeting,status,summary;
@@ -213,17 +210,30 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	}
 })
-function playAI(){
-	for (let rounds = 0; rounds < 6;rounds++){
-		setTimeout(function() {
-			typeWord(hint()["Word"]);
-		}, rounds*5000);
+async function playAI(){
+	for (let rounds = 0; rounds < 6; rounds++) {
+		if(!allowInput)break;
+		let guess = hint()["Word"]
+		typeWord(guess);
+		await wait(1000)
 	}
+	
+}
+async function AIMode(){
+	while (true){
+		playAI()
+		await wait(15000)
+		send('Enter',true)
+	}
+}
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 function sendData(data) {
 	const xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://127.0.0.1:5000/getWord",false); // false = synchronous
+	xhr.open("POST", "http://10.0.0.175:5000/getWord",false); // false = synchronous
 	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.setRequestHeader("Access-Control-Allow-Origin","*");
   
 	xhr.send(JSON.stringify({ JSONData: data }));
   
@@ -270,14 +280,15 @@ function hint(){
 	return chosenWord;
 }
 function typeWord(word){
+	send('Backspace',true)
 	for (let letter = 0; letter < 5;letter++){
 		setTimeout(function() {
 			send(word[letter],false);
-		},letter*100)
+		},letter*200)
 	}
 	setTimeout(function() {
 		send("Enter",false);
-	},1000);
+	},900);
 	
 }
 
