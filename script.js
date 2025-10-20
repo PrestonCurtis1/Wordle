@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			endGame(true);
 		}else{
 			if (currentRow == 6){
-				console.log("Lost on word",typedWord);
+				console.log("Lost on word",randomWord);
 				endGame(false);
 			}else{
 				currentRow++;
@@ -210,20 +210,26 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	}
 })
+var aiIsPlaying = false;
 async function playAI(){
+	if (aiIsPlaying)return;
+	aiIsPlaying = true;
 	for (let rounds = 0; rounds < 6; rounds++) {
 		if(!allowInput)break;
-		let guess = hint()["Word"]
-		typeWord(guess);
-		await wait(1000)
+		await wait(2000);
+		typeWord(hint()["Word"]);
 	}
-	
+	aiIsPlaying = false;
 }
+var stopAI = false;
 async function AIMode(){
-	while (true){
-		playAI()
-		await wait(15000)
-		send('Enter',true)
+	await playAI();
+	await wait(5000);
+	if (!stopAI){
+		send('Enter',true);
+		AIMode()
+	}else{
+		stopAI = false;
 	}
 }
 function wait(ms) {
@@ -279,17 +285,18 @@ function hint(){
 	chosenWord = sendData(content);
 	return chosenWord;
 }
-function typeWord(word){
+var typing = false//so it doesn't start typing more than one word at same time
+async function typeWord(word){
+	if(typing)return;
+	typing = true;
 	send('Backspace',true)
 	for (let letter = 0; letter < 5;letter++){
-		setTimeout(function() {
-			send(word[letter],false);
-		},letter*200)
+		await wait(200)
+		send(word[letter],false);
 	}
-	setTimeout(function() {
-		send("Enter",false);
-	},900);
-	
+	await wait(200)
+	send("Enter",false);
+	typing = false;
 }
 
 function send(key, ctrlPressed) {
