@@ -237,11 +237,11 @@ function wait(ms) {
 }
 function sendData(data) {
 	const xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://10.0.0.175:5000/getWord",false); // false = synchronous
+	xhr.open("POST", "http://10.0.0.175:5000/chooseWord",false); // false = synchronous
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.setRequestHeader("Access-Control-Allow-Origin","*");
   
-	xhr.send(JSON.stringify({ JSONData: data }));
+	xhr.send(JSON.stringify({data}));
   
 	if (xhr.status === 200) {
 	  return JSON.parse(xhr.responseText);
@@ -303,4 +303,5 @@ function send(key, ctrlPressed) {
     var eventOptions = { key: key, ctrlKey: ctrlPressed };
     var event = new KeyboardEvent('keydown', eventOptions);
     document.dispatchEvent(event);
+
 }
