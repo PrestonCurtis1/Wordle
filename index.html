@@ -65,7 +65,7 @@
 			</p>
 		</div>
 		<div id="keyboard">
-			<div id="row1">
+			<div id="row1" class="row">
 				<button id="qButton" class="keyboard" onclick="send('q',false)">q</button>
 				<button id="wButton" class="keyboard" onclick="send('w',false)">w</button>
 				<button id="eButton" class="keyboard" onclick="send('e',false)">e</button>
@@ -77,7 +77,7 @@
 				<button id="oButton" class="keyboard" onclick="send('o',false)">o</button>
 				<button id="pButton" class="keyboard" onclick="send('p',false)">p</button>
 			</div>
-			<div id="row2">
+			<div id="row2" class="row">
 				<button id="aButton" class="keyboard" onclick="send('a',false)">a</button>
 				<button id="sButton" class="keyboard" onclick="send('s',false)">s</button>
 				<button id="dButton" class="keyboard" onclick="send('d',false)">d</button>
@@ -88,7 +88,7 @@
 				<button id="kButton" class="keyboard" onclick="send('k',false)">k</button>
 				<button id="lButton" class="keyboard" onclick="send('l',false)">l</button>
 			</div>
-			<div id="row3">
+			<div id="row3" class="row">
 				<button id="zButton" class="keyboard" onclick="send('z',false)">z</button>
 				<button id="xButton" class="keyboard" onclick="send('x',false)">x</button>
 				<button id="cButton" class="keyboard" onclick="send('c',false)">c</button>
@@ -97,12 +97,12 @@
 				<button id="nButton" class="keyboard" onclick="send('n',false)">n</button>
 				<button id="mButton" class="keyboard" onclick="send('m',false)">m</button>
 			</div>
-			<div class="row4">
-				<button onclick="send('Enter',false)">Submit</button>
-				<button onclick="send('Backspace',false)">Delete</button>
-				<button onclick="send('Backspace',true)">Clear</button>
-				<button onclick="playAI()">AI</button>
-				<button onclick="alert(`try: ${hint()['Word']}`)">Hint</button>
+			<div id="row4" class="row">
+				<button onclick="send('Enter',false)" class="keyboard">Submit</button>
+				<button onclick="send('Backspace',false)" class="keyboard">Delete</button>
+				<button onclick="send('Backspace',true)" class="keyboard">Clear</button>
+				<button onclick="playAI()" class="keyboard">AI</button>
+				<button onclick="alert(`try: ${hint()['Word']}`)" class="keyboard">Hint</button>
 			</div>
 		</div>
 		<p id="warning">AI requires the <a href="https://github.com/PrestonCurtis1/wordle-answer-finder">Wordle Answer Finder</a> API</p>

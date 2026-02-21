@@ -46,8 +46,14 @@ div#keyboard {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  width: 100%;
+  width: 80%;
   text-align: center;
+}
+
+div#keyboard > div.row {
+  display: flex;
+  width: 100%;
+  gap: 4px;
 }
 
 button {
@@ -77,8 +83,12 @@ div#scoreView {
   background-color: red;
 }
 
-div#keyboard div button {
+div#keyboard div.row button {
   padding: 3%;
+  flex: 1;
+  text-align: center;
+  font-family:monospace;
+  min-width: 0;
 }
 span.charBox sup{
   font-size:small;
