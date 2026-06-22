@@ -237,7 +237,7 @@ function wait(ms) {
 }
 function sendData(data) {
 	const xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://10.0.0.175:5000/chooseWord",false); // false = synchronous
+	xhr.open("POST", "http://localhost:5000/chooseWord",false); // false = synchronous
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.setRequestHeader("Access-Control-Allow-Origin","*");
   
